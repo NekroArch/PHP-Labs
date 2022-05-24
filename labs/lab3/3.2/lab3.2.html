@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Multi text</title>
+	<style>
+		.text
+		{
+			height: 200px;
+			width: 400px;
+			font-size: 15px;
+		}
+	</style>
+</head>
+<body>
+
+     <div><textarea id="text"></textarea></div>
+     <div><input type="submit" onclick="mySplit()"></div>
+	<script>
+		
+
+	function mySplit()
+	{
+	     let text= document.getElementById("text").value.split(/[\s+|,.?!#;""/]+/)	
+            .filter(str => str)
+            .map(str => str.trim())
+            .join(', ');
+			let win = window.open("about:blank", "hello", "width=800px, height=500px");
+			win.document.write(text);
+			
+	}
+	</script>
+
+</body>
+</html>

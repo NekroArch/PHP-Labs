@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>LAB 4.2</title>
+	<script scr="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+<body>
+<form action="handler2.php" id="reg" method="post">
+	<div><input type="text" name="lastName" placeholder="Фамилия" required></div>
+	<div><input type="number" name="age" min="6" max="120" placeholder="Возраст" required></div>
+	<div><input type="email" name="email" placeholder="Почта" required> </div>
+	<div class="cheackbox-group">
+		<input id="eng" name="mass[]" value="english" type="checkbox">English<br>
+		<input id="ger" name="mass[]" value="germany" type="checkbox">Germany<br>
+		<input id="chi" name="mass[]" value="chinese" type="checkbox">Chinese<br>
+		<input id="ita" name="mass[]" value="italian" type="checkbox">Italian<br>
+	</div>
+	<input type="submit" id="submitButton" value="Отправить">
+</form>
+
+<script>
+
+document.getElementById('reg').onsubmit = function() {
+	return test();
+	};
+
+function test(){
+		if(document.querySelector('.cheackbox-group').querySelectorAll('input[type="checkbox"]:checked').length > 0){
+			return true;
+		}else{
+			alert('Select language');
+				return false;
+		}
+	};
+</script>
+</body>
+</html>

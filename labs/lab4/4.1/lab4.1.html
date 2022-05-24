@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LAB 4.1</title>
+<meta charset="utf-8">
+</head>
+<body>
+<h2>Введи свои данные:</h2>
+<form action="handler.php" onsubmit="onsubmit()" method="POST">
+<input type="text" name="num1" placeholder="digits">
+<input type="text" name="num2" placeholder="digits">
+<input type="text" name="num3" placeholder="digits">
+<input type="Submit" value="Submit"/>
+<input type="reset"></input>
+</form>
+</body>
+<script>
+function onsubmit() {
+let num1 = document.getElementsByName('num1')[0];
+let num2 = document.getElementsByName('num2')[0];
+let num3 = document.getElementsByName('num3')[0];
+
+if( Number.isInteger(num1.value.trim()) &&
+Number.isInteger(num2.value.trim()) &&
+Number.isInteger(num3.value.trim())) {
+return true;
+}
+alert("Input must be digits")
+return false;
+}
+</script>
+</html>

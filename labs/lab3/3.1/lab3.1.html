@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Калькулятор</title>
+</head>
+<style>
+
+    body {
+        display: flex;
+        user-select: none;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 4px;
+        background: black;
+        padding: 4px;
+        max-width: 360px;
+    }
+
+    .item {
+        padding: 20px;
+        font-size: 22px;
+        cursor: pointer;
+        background: grey;
+    }
+
+    input {
+        width: 350px;
+        height: 60px;
+        font-size: 30px;
+        text-align: right;
+    }
+
+    .input {
+        grid-column: 1 / -1;
+        padding: 0;
+    }
+
+    .clean {
+        grid-column: 1 / 3;
+        background-color: #bdbdbd;
+    }
+
+    .back {
+        grid-column: 3 / -1;
+        background-color: #bdbdbd;
+    }
+
+    .equal {
+        grid-column: 4 / -1;
+        grid-row: 6 / 8;
+        background-color: #bdbdbd;
+    }
+
+    .zero {
+        grid-column: 1/3;
+    }
+</style>
+
+<body>
+<div class="container">
+
+    <div class="item input">
+        <form name="form">
+            <input type="text" name="textview" readonly>
+        </form>
+    </div>
+    <div class="item clean" onclick="clean()">C</div>
+    <div class="item back" onclick="back()">&larr;</div>
+    <div class="item" onclick="insert('(')">(</div>
+    <div class="item" onclick="insert(')')">)</div>
+    <div class="item" onclick="insert('*')">&times;</div>
+    <div class="item" onclick="insert('/')">&divide;</div>
+    <div class="item" onclick="insert('7')">7</div>
+    <div class="item" onclick="insert('8')">8</div>
+    <div class="item" onclick="insert('9')">9</div>
+    <div class="item" onclick="insert('+')">+</div>
+    <div class="item" onclick="insert('4')">4</div>
+    <div class="item" onclick="insert('5')">5</div>
+    <div class="item" onclick="insert('6')">6</div>
+    <div class="item" onclick="insert('-')">-</div>
+    <div class="item" onclick="insert('1')">1</div>
+    <div class="item" onclick="insert('2')">2</div>
+    <div class="item" onclick="insert('3')">3</div>
+    <div class="item equal" onclick="equal()">=</div>
+    <div class="item zero" onclick="insert('0')">0</div>
+    <div class="item" onclick="insert('.')">.</div>
+
+</div>
+
+<script>
+    const ERROR = 'Error';
+    let operations = new Set(['+', '-', '*', '/']);
+
+    function insert(num) {
+        let expr = document.form.textview.value;
+        if (document.form.textview.value !== ERROR) {
+
+            if (operations.has(num) && operations.has(expr.charAt(expr.length - 1))) {
+                document.form.textview.value = expr.substring(0, expr.length - 1) + num;
+            }else {
+                document.form.textview.value += num;
+            }
+        }
+    }
+
+    function clean() {
+        document.form.textview.value = "";
+    }
+
+    function back() {
+        let exp = document.form.textview.value;
+        document.form.textview.value = exp === ERROR ? '' : exp.substring(0, exp.length - 1);
+    }
+
+    function equal() {
+        let exp = document.form.textview.value;
+        if (exp !== ERROR) {
+            try {
+                document.form.textview.value = eval(exp);
+                if (document.form.textview.value === 'Infinity') {
+                    document.form.textview.value = ERROR
+                }
+            } catch (e) {
+                document.form.textview.value = ERROR;
+            }
+        }
+    }
+</script>
+</body>
+</html>
